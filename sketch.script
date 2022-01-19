@@ -1,0 +1,10 @@
+//sketch.script
+
+target = "hong-fang-tea";
+moneyThresh = getServerMaxMoney(target);
+securityThresh = Math.round(getServerMinSecurityLevel(target) * 0.6); //getServerMinSecurityLevel(target) + getServerBaseSecurityLevel(target) / 2; //5; //
+
+tprintf("getServerMinSecurityLevel %d", getServerMinSecurityLevel(target));
+tprintf("getServerSecurityLevel %d", getServerSecurityLevel(target));
+tprintf("getServerBaseSecurityLevel %d", getServerBaseSecurityLevel(target));
+tprintf("securityThresh %d", securityThresh);
