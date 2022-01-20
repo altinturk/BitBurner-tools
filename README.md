@@ -1,5 +1,6 @@
 # BitBurner-tools
 
-Based on [Danielyxie] 's react based bitburner app, these are some JS scripts to use in game -to actually play the game.
+these are some JS scripts to use in (or "play") [Danielyxie](https://github.com/danielyxie/bitburner/)'s react based BitBurner game,
 
-https://github.com/danielyxie/bitburner
+[Steam](https://store.steampowered.com/app/1812820/Bitburner/)
+
