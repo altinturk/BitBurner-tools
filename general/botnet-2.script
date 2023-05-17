@@ -1,0 +1,105 @@
+//var servers = ["n00dles", "max-hardware", "phantasy", "comptek", "zb-institute", "avmnite-02h", "foodnstuff", "nectar-net", "neo-net", "silver-helix", "the-hub", "rothman-uni", "lexo-corp", "snap-fitness", "unitalife", "icarus", "catalyst", "rho-construction", "aevum-police", "global-pharm", "deltaone", "defcomm", "univ-energy", "nova-med", "solaris", "taiyang-digital", "zeus-med", "infocomm", "zb-def", "I.I.I.I", "alpha-ent", "aerocorp", "omnia", "netlink", "summit-uni", "crush-fitness", "CSEC", "sigma-cosmetics", "joesguns", "hong-fang-tea", "zer0", "omega-net", "johnson-ortho", "syscore", "millenium-fitness", "galactic-cyber", "harakiri-sushi", "iron-gym", "darkweb"];
+//var servers = ["n00dles", "max-hardware", "phantasy", "zb-institute", "avmnite-02h", "foodnstuff", "nectar-net", "neo-net", "silver-helix", "the-hub", "rothman-uni", "lexo-corp", "snap-fitness", "unitalife", "icarus", "catalyst", "rho-construction", "aevum-police", "global-pharm", "deltaone", "defcomm", "univ-energy", "nova-med", "solaris", "taiyang-digital", "zeus-med", "infocomm", "zb-def", "I.I.I.I", "alpha-ent", "aerocorp", "omnia", "netlink", "summit-uni", "crush-fitness", "CSEC", "sigma-cosmetics", "joesguns", "hong-fang-tea", "zer0", "omega-net", "johnson-ortho", "syscore", "millenium-fitness", "galactic-cyber", "harakiri-sushi", "iron-gym"];
+//20220719 lastest
+var servers = ["4sigma","aerocorp","aevum-police","alpha-ent","applied-energetics","avmnite-02h","b-and-a","blade","catalyst","clarkinc","computek","crush-fitness","CSEC","darkweb","defcomm","deltaone","ecorp","foodnstuff","fulcrumassets","fulcrumtech","galactic-cyber","global-pharm","harakiri-sushi","helios","home","hong-fang-tea","I.I.I.I","icarus","infocomm","iron-gym","joesguns","johnson-ortho","kuai-gong","lexo-corp","max-hardware","megacorp","microdyne","millenium-fitness","n00dles","nectar-net","neo-net","netlink","nova-med","nwo","omega-net","omnia","omnitek","phantasy","powerhouse-fitness","rho-construction","rothman-uni","run4theh111z","sigma-cosmetics","silver-helix","snap-fitness","solaris","stormtech","summit-uni","syscore","taiyang-digital","The-Cave","the-hub","titan-labs","unitalife","univ-energy","vitalife","zb-def","zb-institute","zer0","zeus-med"];
+//var servers = ["n00dles", "foodnstuff", "sigma-cosmetics", "joesguns"];
+
+
+var counter = 0;
+var message = "";
+var openedPorts = 0;
+
+for (counter = 0; counter < servers.length; counter++) {
+
+	target = servers[counter];
+
+	message = "#" + (counter + 1) + "/" + servers.length + " [" + target + "]";
+	openedPorts = 0;
+
+	if (hasRootAccess(target)) {
+		message = message + " Skip, rooted";
+	}
+	else if (getHackingLevel() < getServerRequiredHackingLevel(target)) {
+		message = message + " INSUFF Hack: " + getHackingLevel() + "/" + getServerRequiredHackingLevel(target);
+	}
+	else {
+		message = message + " LVL: " + getHackingLevel() + "/" + getServerRequiredHackingLevel(target);
+
+		if (fileExists("BruteSSH.exe")) {
+			brutessh(target);
+			message = message + " SSH";
+			openedPorts = openedPorts + 1;
+		}
+		if (fileExists("FTPCrack.exe")) {
+			ftpcrack(target);
+			message = message + "|FTP";
+			openedPorts = openedPorts + 1;
+		}
+		if (fileExists("relaySMTP.exe")) {
+			relaysmtp(target);
+			message = message + "|SMTP";
+			openedPorts = openedPorts + 1;
+		}
+		if (fileExists("HTTPWorm.exe")) {
+			httpworm(target);
+			message = message + "|HTTP";
+			openedPorts = openedPorts + 1;
+		}
+		if (fileExists("SQLInject.exe")) {
+			sqlinject(target);
+			message = message + "|SQL";
+			openedPorts = openedPorts + 1;
+		}
+		if (getServerNumPortsRequired(target) > openedPorts) {
+			message = message + " PORTS NEEDED:" + openedPorts + "/" + getServerNumPortsRequired(target);
+		}
+		else {
+			nuke(target);
+			if (hasRootAccess(target)) {
+				message = message + " [nuked]";
+
+				exec("hack-B1.script", "home", 240, target);
+				message = message + " hackB1@home x240";
+
+			} else {
+				message = message + " [NOT NUKED] [not script running]";
+			}
+		}
+
+
+
+
+		//installBackdoor(target);
+		//tprintf("[%s] backdoor installed", target);
+
+		//hack(target);
+		//tprintf("[%s] first hack done", target);
+
+	}
+	// exec("hack-B1.script", "home", 240, target);
+	// message = message + " hackB1@home x240";
+
+	tprintf("%s", message);
+//
+	///////sell("testme");
+	//////teller(5,70,target,1379,1046,true,true,true,true,true,true,"hackB1@home",240);
+}
+
+
+
+
+
+function sell(counter){ //,listLength,serverName,myLvl,reqLvl,isSSHd,isFTPd,isSMTPd,isHTTPd,isNuked,scriptToRun,scriptThreadCount) {
+	// [23:38:31] #49/70 [powerhouse-fitness] LVL: 1378/1036 SSH|FTP|SMTP|HTTP|SQL [nuked] hackB1@home x240
+	//            
+    //tprintf("counter (%-10s)", counter);
+}
+
+
+
+function teller(counter,listLength,serverName,myLvl,reqLvl,isSSHd,isFTPd,isSMTPd,isHTTPd,isSQLd,isNuked,scriptToRun,scriptThreadCount) {
+	// [23:38:31] #49/70 [powerhouse-fitness] LVL: 1378/1036 SSH|FTP|SMTP|HTTP|SQL [nuked] hackB1@home x240
+	//          [ #000/000 - xxxxxiiiiioooooiiiii - root - 0000:0000 - SSH - FTP - SMTP - HTTP - SQL - ssssssssss * 0000 ]
+
+		tprintf("[#%3d/%3d - %-20s - %s - %4d:%-4d -%s-%s-%s-%s-%s- %10s*%-4d]", counter, listLength, serverName, isNuked?"root":"_$ >", myLvl, reqLvl, isSSHd?"SSH":"   ", isFTPd?"FTP":"   ", isSMTPd?"SMTP":"    ", isHTTPd?"HTTP":"    ", isSQLd?"SQL":"   ", scriptToRun, scriptThreadCount);
+}
