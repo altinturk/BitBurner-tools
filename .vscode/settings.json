@@ -1,7 +1,7 @@
 {
-    "bitburner.fileWatcher.enable": true,
+    "bitburner.fileWatcher.enable": false,
     "bitburner.authToken": "tHctoxCLAtSMlbilAJfkfFpHM+8AE2fslTueL43+B0UyfL5X6GOVcvN2x4uK3NiO",
-    "bitburner.showFileWatcherEnabledNotification": true,
+    "bitburner.showFileWatcherEnabledNotification": false,
     "bitburner.showPushSuccessNotification": true,
-    "bitburner.scriptRoot": "C:\\ROOT\\git-storage\\bitburner-sketches\\"
+    "bitburner.scriptRoot": "."
 }
