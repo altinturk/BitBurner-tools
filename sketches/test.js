@@ -60,7 +60,9 @@ ns.print(targetArray.length);
  ns.printf("╚════════════════════╧═══════╧══════╩════════════════════╧═══════╧══════╩════════════════════╧═══════╧══════╝");
 		// */
 
-
+  ns.run("runme.js", 2, "home", "n00dles");
+  ns.tprintf("remote exec ok 2");
+//  ns.tprint(`[${localeHHMMSS()}] Spawning spider.js`)
 		ns.asleep(50000);
 
 }
@@ -81,4 +83,17 @@ ns.print(targetArray.length);
 
 		// //	ns.printf("╟───────┼────────────────────────────────────────────────────────────────────────────── ║╧│ ┼┴┬╧  ──╢");
 
-		
+	
+
+//runme content	
+/** @param {NS} ns 
+export async function main(ns) {
+
+  const target = ns.args[0]
+  const threads = ns.args[1]
+  const delay = ns.args[2]
+
+  ns.tprint(`runme exec on a1 ${target} a2 ${threads} a3 ${delay}`)
+}
+
+*/
